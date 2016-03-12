@@ -1,6 +1,5 @@
-# OSX/Linux (https://github.com/travis-ci-tester/toolchain-table)
-
-language: cpp
+language:
+  - cpp
 
 os:
   - linux
@@ -16,17 +15,9 @@ sudo:
 # * http://stackoverflow.com/a/30925448/2288008
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
       - python3
-      - python3-requests
-
-      # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
-      - libstdc++-4.8-dev
-
-      # https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
-      - g++-4.8
+      - python3-setuptools
 
 install:
   # Info about OS
@@ -34,11 +25,14 @@ install:
 
   # Install Python 3
   - if [[ "`uname`" == "Darwin" ]]; then brew install python3; fi
+
   - which python3
   - python3 --version
 
-  # Install 'requests'
-  - if [[ "`uname`" == "Darwin" ]]; then pip3 install requests; fi
+  - which easy_install3
+  - easy_install3 --version
+
+  - easy_install3 --user requests
 
 script:
   - python3 -c 'import requests'
