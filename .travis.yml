@@ -17,6 +17,9 @@ addons:
   apt:
     packages:
       - python3
+
+      # python3-pip package is not available, use 'easy_install3':
+      # * https://github.com/travis-ci/apt-package-whitelist/issues/768
       - python3-setuptools # easy_install3
 
 install:
@@ -27,6 +30,7 @@ install:
   - if [[ "`uname`" == "Darwin" ]]; then brew install python3; fi
 
   # Install Python package 'requests'
+  # 'easy_install3' is not installed by 'brew install python3' on OS X 10.9 Maverick
   - if [[ "`uname`" == "Darwin" ]]; then pip3 install requests; fi
   - if [[ "`uname`" == "Linux" ]]; then easy_install3 --user requests; fi
 
