@@ -35,7 +35,7 @@ install:
   - python3 --version
 
   # Install 'requests'
-  # - if [[ "`uname`" == "Darwin" ]]; then sudo pip3 install requests; fi
+  - if [[ "`uname`" == "Darwin" ]]; then pip3 install requests; fi
 
 script:
   - python3 -c 'import requests'
