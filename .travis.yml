@@ -11,8 +11,6 @@ sudo:
 # * http://stackoverflow.com/a/30925448/2288008
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
       - python3
 
@@ -23,14 +21,13 @@ addons:
 matrix:
   include:
     - os: linux
-    - os: osx
 
 install:
   # Info about OS
   - uname -a
 
-  # Install Python 3
-  - if [[ "`uname`" == "Darwin" ]]; then travis_retry brew install python3; fi
+  # Workaround for https://github.com/travis-ci/travis-ci/issues/8363
+  - pyenv global system 3.5
 
   - pip3 install requests
 
